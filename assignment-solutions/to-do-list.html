@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To DO List App</title>
+    <title>To Do List App</title>
     <style>
         body{
             background-color: #808080;
@@ -19,8 +19,12 @@
         input:focus{
             outline: none;
         }
+        .removeBtn:hover{
+            background-color: rgb(255, 98, 98);
+        }
         input,
         button {
+            border: none;
             padding: 10px;
         }
         .list-wrapper{
@@ -31,6 +35,9 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+        }
+        .list-item + .list-item{
+            margin-top: 10px;
         }
         .container{
             display: grid;
@@ -78,6 +85,7 @@
             serialDiv.innerHTML = nameList.length;
             nameDiv.innerHTML = myName;
             removeBtn.innerHTML = "Remove";
+            removeBtn.classList.add('removeBtn')
 
             removeBtn.addEventListener('click',function(){
                 this.parentElement.remove()
