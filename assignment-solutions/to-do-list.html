@@ -28,10 +28,10 @@
             padding: 10px;
         }
         .list-wrapper{
-            width: 35%;
+            width: 30%;
             margin: 20px 0;
         }
-        .list-item {
+        .list-item div{
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -53,19 +53,18 @@
             <b> Enter Your Name : </b> <input type="text" id="inputName"> 
             <button type="button" onclick="addNameToList()">Add</button>
         </div>
-        <div class="list-wrapper" id="list-wrapper">
-            <div class="list-item"><div>Sr No</div><div>Name</div><div>Action</div></div>
-        </div>
+        <ol class="list-wrapper" id="list-wrapper">
+            <!-- <div class="list-item"><div>Sr No</div><div>Name</div><div>Action</div></div> -->
+        </ol>
     </div>
 
     <script>
-        nameList = []
+      
         function addNameToList() {
             myName = document.getElementById('inputName').value;
             if(myName.length<=1){
                 window.alert("Name length should be Greater than 2")
             }else{
-                nameList.push(myName);
                 document.getElementById('inputName').value="";
                 appendName(myName);
             }
@@ -74,27 +73,26 @@
 
         function appendName(myName) {
 
-            listItem = document.createElement('div');
+            listItem = document.createElement('li');
+            listContent = document.createElement('div')
             listItem.classList.add('list-item');
-            listItem.id = nameList.length;
 
-            serialDiv = document.createElement('div');
             nameDiv = document.createElement('div');
             removeBtn = document.createElement('button');
 
-            serialDiv.innerHTML = nameList.length;
+
             nameDiv.innerHTML = myName;
             removeBtn.innerHTML = "Remove";
             removeBtn.classList.add('removeBtn')
 
             removeBtn.addEventListener('click',function(){
-                this.parentElement.remove()
-                nameList.pop()
+                this.parentElement.parentElement.remove()
             });
 
             listWrapper = document.getElementById('list-wrapper');
             listWrapper.appendChild(listItem)
-            listItem.append(serialDiv, nameDiv, removeBtn);
+            listItem.appendChild(listContent)
+            listContent.append( nameDiv, removeBtn);
 
             console.log("NameList",nameList)
            
