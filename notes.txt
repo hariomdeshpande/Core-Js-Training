@@ -1,0 +1,11 @@
+JS follow ECMA Script 
+    ECMA is nothing but Standard Organization
+
+document.bgColor="red";
+
+task 11-10
+    inbuild methods for 
+        array
+        string 
+        date
+        math
