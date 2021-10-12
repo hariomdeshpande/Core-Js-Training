@@ -1,3 +1,16 @@
-Create todo list 
+ --> Assignment 1 
+        -> create a to do list 
+           Tasks 
+        Name : textbox 
+            Add (button)
+        S.no  Name  Delete 
+        1     Sumit   delete 
+        2     Anuj    delete 
+      --> Assignment 2 
+       -> create a banner with 5 images , and change images after every 5 
+       seconds with the help of setIntervals.
+       
 
-Name - textbox
+
+
+
