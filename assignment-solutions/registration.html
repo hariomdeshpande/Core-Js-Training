@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page - RegEx</title>
+    <style>
+         body{
+            background-color: #808080;
+            font-size: 1.2rem;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+        h2,h4{
+            text-align: center;
+        }
+        input,button{
+            margin: 10px 0;
+            padding: 8px;
+        }
+        input:focus{
+            outline: none;
+        }
+        .container{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 3% 0;
+        }
+        .container div{
+            display: flex;
+            flex-direction: column;
+            margin: 10px 0;
+            width: 30%;
+            position: relative;
+            font-weight: 600;
+        }
+        .container div span{
+            display: none;
+            font-weight: 600;
+            position: absolute;
+            top: 0;
+            right: 0;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <h2>Registration Page using RegEx Validations</h2>
+    <h4>Submit Button will only Enable if all input fields are valid !</h4>
+    <div class="container">
+        <div> Enter First Name : <input type="text" id="fname"> <span class="error-span" id="error-fname-span"></span> </div>
+        <div> Enter Last Name : <input type="text" id="lname"> <span class="error-span"  id="error-lname-span"></span> </div>
+        <div> Enter User Email: <input type="text" id="email"> <span class="error-span"  id="error-email-span"></span></div>
+        <div> Enter Phone Number : <input type="text" id="phone"> <span class="error-span"  id="error-phone-span">Please Enter Correct Email</span> </div>
+        <div><button id="submit">Submit</button></div>
+    </div>
+
+    <script>
+        // RegEx for All Elemnts
+        var nameRegEx =/^[a-zA-Z]*$/;
+        var emailRegEx = /^[a-zA-Z0-9_\.]+@+[a-zA-Z]+\.[a-zA-Z]{2,3}$/;
+        var phoneRegEx =/^[0-9]{10}$/;
+
+        // Accessing All Elements
+
+        fnameInput = document.getElementById('fname');
+        errorFName = document.getElementById('error-fname-span');
+
+        lnameInput = document.getElementById('lname');
+        errorLName = document.getElementById('error-lname-span');
+
+        emailInput = document.getElementById('email');
+        errorEmail = document.getElementById('error-email-span');
+
+        phoneInput = document.getElementById('phone');
+        errorPhone = document.getElementById('error-phone-span');
+
+        allErrorSpans = document.getElementsByClassName('valid-input');
+
+        submitBtn = document.getElementById('submit');
+        
+        function validator(){
+            console.log(allErrorSpans.length)
+            if(allErrorSpans.length===4){
+                submitBtn.removeAttribute('disabled');
+            }else{
+                submitBtn.setAttribute('disabled','true');
+            }
+        };
+        
+       
+        validator();
+
+        function raiseError(inputBox,regExp,errorSpan,innerHtmlSuccessContent,innerHtmlErrorContent){
+          if(!regExp.test(inputBox.value)&&inputBox.value.length>0){
+            errorSpan.style.display='block';
+            errorSpan.style.color='#f00';
+            errorSpan.innerHTML=innerHtmlSuccessContent;
+            errorSpan.classList.remove('valid-input');
+            validator();
+          }
+          else if(regExp.test(inputBox.value)&&inputBox.value.length>1){
+            errorSpan.style.display='block';
+            errorSpan.style.color='#0f0';
+            errorSpan.innerHTML=innerHtmlErrorContent;
+            errorSpan.classList.add('valid-input');
+            validator();
+
+          }else{
+            errorSpan.style.display='none';
+          }
+        }
+
+
+        fnameInput.addEventListener('input',function(){
+            raiseError(fnameInput,nameRegEx,errorFName,"Enter Valid First Name","First Name is Valid")
+        });
+
+        lnameInput.addEventListener('input',function(){
+            raiseError(lnameInput,nameRegEx,errorLName,"Enter Valid Last Name","Last Name is Valid")
+        });
+
+        emailInput.addEventListener('input',function(){
+            raiseError(emailInput,emailRegEx,errorEmail,"Enter Valid Email","Email is Valid")
+        });
+
+        phoneInput.addEventListener('input',function(){
+            raiseError(phoneInput,phoneRegEx,errorPhone,"Enter Valid Phone","Phone is Valid")
+        });
+
+
+    </script>
+</body>
+</html>
